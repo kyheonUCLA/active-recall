@@ -1,26 +1,22 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
-function App() {
+import PopupCard from './components/PopupCard';
+import { useAllContext } from './context/AllContextProvider';
+import GenerateButton from './components/GenerateButton';
+
+function App() {	
+  const { user, response } = useAllContext(); 
+  // how the tf does this even work
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='rounded-lg'>
+      <PopupCard />
+      <GenerateButton />
+      {response !== null ? <p>{JSON.stringify(response.choices[0].message.content)}</p> : <p>Loading...</p>}
+      <p>{JSON.stringify(user)}</p>
     </div>
   );
-}
+};
 
 export default App;
