@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
+import './global.css';
 
 import PopupCard from './components/PopupCard';
 import { useAllContext } from './context/AllContextProvider';
 import GenerateButton from './components/GenerateButton';
+import Test from './components/Test';
+
 
 function App() {	
   const { user, response } = useAllContext(); 
-  // how the tf does this even work
+  
 
   return (
     <div className='rounded-lg'>
@@ -15,6 +17,7 @@ function App() {
       <GenerateButton />
       {response !== null ? <p>{JSON.stringify(response.choices[0].message.content)}</p> : <p>Loading...</p>}
       <p>{JSON.stringify(user)}</p>
+      <Test></Test>
     </div>
   );
 };

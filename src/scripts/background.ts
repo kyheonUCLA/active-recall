@@ -1,13 +1,9 @@
-// service worker
-chrome.action.onClicked.addListener((tab) => {
-  chrome.scripting.executeScript({
-    target: {tabId: tab.id as number},
-    func: () => {
-      document.body.style.backgroundColor = 'red';
-      alert("Hello from my extension");
-    }
-  })
-})
 
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  console.log(sender.tab ? `from content: ${sender.tab.url}` : "from extension");
+  console.log(message.selected);
+  sendResponse({ data: "The data has sucessfully reached background" });
+  chrome.runtime.sendMessage(message);
+});
 
 export {}
