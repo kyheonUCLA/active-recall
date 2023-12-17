@@ -1,20 +1,32 @@
 console.log("content script!!");
 
-const handleMouseup = () => {
-  if (window) {
-    const selected = window.getSelection()?.toString().trim();
-    if (selected) {
-      if (selected.length > 0) {
-        console.log(`selected text: ${selected}`);
-        chrome.runtime.sendMessage({selected}, (response) => {
-          console.log(response.data)
-        })
-      }
-    } else {
-      console.log("nothing selected");
+
+const getSelectionData = () => {
+  const selection = window.getSelection();
+  const parentNode = selection?.anchorNode?.parentNode;
+  const text = selection?.toString().trim();
+  if ((text && text.length > 0) && parentNode) {
+    return {
+      text: text, 
+      context: parentNode.textContent,
     }
+  } else {
+    return null
   }
 }
+
+
+
+const handleMouseup = () => {
+  const highlighted = getSelectionData();
+  if (highlighted) {
+    chrome.runtime.sendMessage(highlighted, (response) => {
+      console.log(response.data.completion)
+    });
+  }
+}
+
+
 document.addEventListener('mouseup', handleMouseup);
 
 

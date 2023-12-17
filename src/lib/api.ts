@@ -3,7 +3,7 @@ import type { ResponseType } from "./types";
 // import { config } from "dotenv";
 // config();
 
-const apiKey = "sk-";
+const apiKey = "";
 const openai = new OpenAI({ apiKey: apiKey, dangerouslyAllowBrowser: true });
 
 async function getCompletion(prompt: string) {

@@ -8,4 +8,12 @@ type UserType = {
   phone: string,
 }
 
-export type { ResponseType, UserType };
+type MessageType = {
+  selection: Selection,
+  text: string,
+  tab?: chrome.tabs.Tab,
+  gpt?: ResponseType,
+}
+
+
+export type { ResponseType, UserType, MessageType };
