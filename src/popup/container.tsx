@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Popup from './Popup';
+import PopupApp from './popup';
 
 const container = document.createElement('div');
 
